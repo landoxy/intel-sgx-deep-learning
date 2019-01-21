@@ -1,0 +1,4 @@
+log
+*.csv
+weights_*
+.vscode/

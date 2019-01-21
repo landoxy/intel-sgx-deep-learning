@@ -1,0 +1,20 @@
+enclave {
+    
+    trusted {
+        public void ecall_train_network([in, count=size_train_file] char *train_file, int size_train_file, int num_threads);
+        public void ecall_test_network([in, count=size_test_file] char *test_file, int size_test_file, int num_threads);
+        public void ecall_thread_enter_enclave_waiting(int thread_id);
+        public void ecall_build_network([in, count=len_string] char *file_string, size_t len_string, [in, count=size_weights] char *weights, size_t size_weights);
+    };
+
+    untrusted {
+        void ocall_print_string([in, string] const char *str);
+        
+        void ocall_start_measuring_training(int sub_time_index, int repetitions);
+        void ocall_end_measuring_training(int sub_time_index, int repetitions);
+
+        void ocall_spawn_threads(int n);
+
+        void ocall_push_weights([in, size=size, count=nmemb] const char *ptr, size_t size, size_t nmemb);
+    };
+};
